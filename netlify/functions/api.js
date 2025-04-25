@@ -53,7 +53,7 @@ app.use(
       `${process.env.FRONTEND_URL}`,
       "http://localhost:3000",
       "https://gemechuadam.com",
-      "https://680b5d7f9e61520008d04821--gemechuadam.netlify.app/",
+      "https://680b63d10e67460008ab41d7--gemechuadam.netlify.app/home",
       "https://gemechuadam-backend.netlify.app",
     ],
     credentials: true,
