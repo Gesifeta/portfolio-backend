@@ -65,11 +65,11 @@ app.use(express.urlencoded({ extended: true }));
 // Add this after your middleware configurations
 // Create an 'uploads' directory to store images
 
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+app.use("/api/uploads", express.static(path.join(__dirname, "uploads")));
 
-app.use("/images", express.static(path.join(__dirname, "uploads")));
+app.use("/api/images", express.static(path.join(__dirname, "uploads")));
 // user router
-app.use("/api//", userRouter);
+app.use("/api/", userRouter);
 app.use("/api/", skillRouter);
 app.use("/api/", projectRouter);
 app.use("/api/", experienceRouter);
