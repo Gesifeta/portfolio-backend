@@ -5,8 +5,8 @@ import dotenv from "dotenv";
 //import path from "path";
 import ServerlessHttp from "serverless-http";
 // import { fileURLToPath } from "url";
-// const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// // const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
 
 import { getPool, closePool } from "./database/db.js";
 import { userRouter } from "./routes/user.router.js";
