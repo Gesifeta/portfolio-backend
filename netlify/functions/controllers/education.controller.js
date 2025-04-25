@@ -1,5 +1,5 @@
 import express from "express";
-import { ordinaryDatabaseQuery } from "./../database/db.js";
+import { ordinaryDatabaseQuery } from "../database/db.js";
 
 const educationRoutes = express.Router();
 // A function to add new education

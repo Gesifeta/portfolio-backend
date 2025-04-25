@@ -1,6 +1,5 @@
 [build]
- functions="functions"
-  external_node_modules = ["express"]
+ functions="netlify/functions"
   node_bundler = "esbuild"
 [[redirects]]
   force = true
