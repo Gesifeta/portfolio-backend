@@ -100,10 +100,9 @@ app.use((req, res, next) => {
   if (req.method === "OPTIONS") {
     return res.sendStatus(200);
   }
-
   next();
 });
-// Start server
+// // Start server
 // let server = app.listen(port, () => {
 //   console.log(`Server is running on port ${port}`);
 // });
