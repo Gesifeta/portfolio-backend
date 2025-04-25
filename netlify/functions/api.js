@@ -69,16 +69,16 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 app.use("/images", express.static(path.join(__dirname, "uploads")));
 // user router
-app.use("/.netlify/functions/api", userRouter);
-app.use("/.netlify/functions/api", skillRouter);
-app.use("/.netlify/functions/api", projectRouter);
-app.use("/.netlify/functions/api", experienceRouter);
-app.use("/.netlify/functions/api", educationRouter);
-app.use("/.netlify/functions/api", certificationRouter);
-app.use("/.netlify/functions/api", badgeRouter);
-app.use("/.netlify/functions/api", analyticsRouter);
+app.use("/api//", userRouter);
+app.use("/api/", skillRouter);
+app.use("/api/", projectRouter);
+app.use("/api/", experienceRouter);
+app.use("/api/", educationRouter);
+app.use("/api/", certificationRouter);
+app.use("/api/", badgeRouter);
+app.use("/api/", analyticsRouter);
 // Basic route
-app.get("/.netlify/functions/api/", (req, res) => {
+app.get("/api/", (req, res) => {
   res.json({ message: "Welcome to the API" });
 });
 
