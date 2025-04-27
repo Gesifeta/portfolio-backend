@@ -14,7 +14,7 @@ export const addNewExperience = async (req, res) => {
       end_year,
       image_url,
     } = req.body;
-    const queryString = `INSERT INTO experiences (id, user_id, position, company_name, city, country,  start_year, end_year, image_url) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *`;
+    const queryString = `INSERT INTO experiences (id, user_id, position, company_name, city, country,  start_year, end_year, image_url) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)  RETURNING *`;
     const params = [
       id,
       user_id,
@@ -38,7 +38,7 @@ export const addNewExperience = async (req, res) => {
 // Get all experiences
 export const getAllExperiences = async (req, res) => {
   try {
-    const queryString = `SELECT * FROM experiences ORDER BY start_year`;
+    const queryString = `SELECT * FROM experiences ORDER BY end_year`;
     const result = await ordinaryDatabaseQuery(queryString, []);
     return res.json(result.rows);
   } catch (error) {
