@@ -51,7 +51,7 @@ app.use(
   cors({
     origin: [
       `${process.env.FRONTEND_URL}`,
-      "http://localhost:3000",
+      "http://localhost:5173",
       "https://gemechuadam.com",
       "https://680b6c763e4a5400088416e2--gemechuadam.netlify.app",
       "https://gemechuadam-backend.netlify.app",
