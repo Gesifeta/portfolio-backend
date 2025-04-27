@@ -15,18 +15,29 @@ import {
 // project routes
 export const projectRouter = express.Router();
 
-projectRouter.post("/projects/new", express.json(), addNewProject);
+projectRouter.post(
+  "/projects/new",
+  isAuthenticated,
+  express.json(),
+  addNewProject
+);
 projectRouter.get("/projects", getAllProjects);
-projectRouter.get("/projects/:id", getProjectById);
+projectRouter.get("/projects/project/:id", getProjectById);
 // upload images using multer
 
 const upload = multer({ storage: fileStorageEngine });
 projectRouter.post(
   "/projects/upload",
+  isAuthenticated,
   express.json(),
   upload.single("file"),
   uploadProjectImage
 );
 
-projectRouter.put("/projects/:id", express.json(), updateProject);
-projectRouter.delete("/project>.",deleteProject);;
+projectRouter.put(
+  "/projects/update/project/:id",
+  isAuthenticated,
+  express.json(),
+  updateProject
+);
+projectRouter.delete("/projects/delete/project/:id", isAuthenticated, deleteProject);

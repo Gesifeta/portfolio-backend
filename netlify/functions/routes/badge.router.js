@@ -8,12 +8,17 @@ import {
   updateBadge,
   deleteBadge,
 } from "../controllers/badge.controller.js";
+import { isAuthenticated } from "../auth/middleware.js";
 
 export const badgeRouter = express.Router();
 badgeRouter.post("/badges/new", express.json(), addNewBadge);
 badgeRouter.get("/badges", getAllBadges);
-badgeRouter.get("/badge/:id", getBadgeById);
-badgeRouter.get("/badge/user/:id", getBadgeByUserId);
-badgeRouter.put("badge/update/:id", express.json(), updateBadge);
-badgeRouter.delete("badge/delete/:id", deleteBadge);
-
+badgeRouter.get("/badges/badge/:id", getBadgeById);
+badgeRouter.get("/badges/badge/user/:id", isAuthenticated, getBadgeByUserId);
+badgeRouter.put(
+  "/badges/badge/update/:id",
+  isAuthenticated,
+  express.json(),
+  updateBadge
+);
+badgeRouter.delete("/badges/badge/delete/:id", isAuthenticated, deleteBadge);

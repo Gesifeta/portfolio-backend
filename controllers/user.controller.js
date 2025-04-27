@@ -134,7 +134,6 @@ export const loginUser = async (req, res) => {
       error: "Invalid credentials",
     });
   } catch (error) {
-    console.log(error);
     return res.json({
       error: error.message,
       message: "Unexpected error occured",
@@ -190,6 +189,64 @@ export const deleteUser = async (req, res) => {
     return res.json(result.rows[0]);
   } catch (error) {}
 };
+//update users image by user id
+export const updateUserImage = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { image_url } = req.body;
+    const queryString = `UPDATE users SET image_url = $1 WHERE id = $2 RETURNING *`;
+    const params = [image_url, id];
+    const result = await ordinaryDatabaseQuery(queryString, params);
+    if (result.rows.length === 0) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    return res.json(result.rows[0]);
+  } catch (error) {}
+};
+//update user's role 
+export const updateUserRole = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { role } = req.body;
+    const queryString = `UPDATE users SET role = $1 WHERE id = $2 RETURNING *`;
+    const params = [role, id];
+    const result = await ordinaryDatabaseQuery(queryString, params);
+    if (result.rows.length === 0) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    return res.json(result.rows[0]);
+  } catch (error) {}
+};
+// update user status
+export const updateUserStatus = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { status } = req.body;
+    const queryString = `UPDATE users SET status = $1 WHERE id = $2 RETURNING *`;
+    const params = [status, id];
+    const result = await ordinaryDatabaseQuery(queryString, params);
+    if (result.rows.length === 0) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    return res.json(result.rows[0]);
+  } catch (error) {}
+};
+// update users image by email
+
+export const updateUserImageByEmail = async (req, res) => {
+  try {
+    const { email } = req.params;
+    const { image_url } = req.body;
+    const queryString = `UPDATE users SET image_url = $1 WHERE email = $2 RETURNING *`;
+    const params = [image_url, email];
+    const result = await ordinaryDatabaseQuery(queryString, params);
+    if (result.rows.length === 0) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    return res.json(result.rows[0]);
+  } catch (error) {}
+};
+
 // function to get user by email
 export const getUserByEmail = async (req, res) => {
   try {

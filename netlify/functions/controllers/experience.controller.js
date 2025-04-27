@@ -27,10 +27,8 @@ export const addNewExperience = async (req, res) => {
       image_url,
     ];
     const result = await ordinaryDatabaseQuery(queryString, params);
-    console.log(result.rows[0]);
     return res.json(result.rows);
   } catch (error) {
-    console.log(error);
     return res.json({
       error: error.message,
       message: "Unexpected error occured",

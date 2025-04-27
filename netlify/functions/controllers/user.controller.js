@@ -134,12 +134,37 @@ export const loginUser = async (req, res) => {
       error: "Invalid credentials",
     });
   } catch (error) {
-    console.log(error);
     return res.json({
       error: error.message,
       message: "Unexpected error occured",
     });
   }
+};
+// function to logout user
+export const logoutUser = async (req, res) => {
+  try {
+    res.clearCookie("token");
+    return res.json({ message: "User logged out successfully" });
+  } catch (error) {
+    return res.json({
+      error: error.message,
+      message: "Unexpected error occured",
+    });
+  }
+};
+// function to update user image
+export const updateUserImage_url = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { image_url } = req.body;
+    const queryString = `UPDATE users SET image_url = $1 WHERE id = $2 RETURNING *`;
+    const params = [image_url, id];
+    const result = await ordinaryDatabaseQuery(queryString, params);
+    if (result.rows.length === 0) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    return res.json(result.rows[0]);
+  } catch (error) {}
 };
 
 // function to get user by id
@@ -248,6 +273,48 @@ export const getUserByUser_nameOrEmailOrPasswordOrId = async (req, res) => {
     const { user_nameOrEmailOrPasswordOrId } = req.params;
     const queryString = `SELECT * FROM users WHERE user_name = $1 OR email = $1 OR password = $1 OR id = $1`;
     const params = [user_nameOrEmailOrPasswordOrId];
+    const result = await ordinaryDatabaseQuery(queryString, params);
+    if (result.rows.length === 0) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    return res.json(result.rows[0]);
+  } catch (error) {}
+};
+// update user password
+export const updateUserPassword = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { password } = req.body;
+    const queryString = `UPDATE users SET password = $1 WHERE id = $2 RETURNING *`;
+    const params = [password, id];
+    const result = await ordinaryDatabaseQuery(queryString, params);
+    if (result.rows.length === 0) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    return res.json(result.rows[0]);
+  } catch (error) {}
+};
+// update user email
+export const updateUserEmail = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { email } = req.body;
+    const queryString = `UPDATE users SET email = $1 WHERE id = $2 RETURNING *`;
+    const params = [email, id];
+    const result = await ordinaryDatabaseQuery(queryString, params);
+    if (result.rows.length === 0) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    return res.json(result.rows[0]);
+  } catch (error) {}
+};
+// update user username
+export const updateUserUsername = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { user_name } = req.body;
+    const queryString = `UPDATE users SET user_name = $1 WHERE id = $2 RETURNING *`;
+    const params = [user_name, id];
     const result = await ordinaryDatabaseQuery(queryString, params);
     if (result.rows.length === 0) {
       return res.status(404).json({ message: "User not found" });

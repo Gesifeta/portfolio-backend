@@ -29,7 +29,6 @@ export const addNewBadge = async (req, res) => {
     const result = await ordinaryDatabaseQuery(queryString, params);
     return res.json(result.rows);
   } catch (error) {
-    console.log(error);
     return res.json({
       error: error.message,
       message: "Unexpected error occured",

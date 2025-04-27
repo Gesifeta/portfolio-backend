@@ -3,7 +3,6 @@ import { ordinaryDatabaseQuery } from "../database/db.js";
 // a function to add new certifications
 export const addNewCertification = async (req, res) => {
   try {
-    console.log(req.body);
     const {
       id,
       user_id,
@@ -32,10 +31,8 @@ export const addNewCertification = async (req, res) => {
       icon_url,
     ];
     const result = await ordinaryDatabaseQuery(queryString, params);
-    console.log(result.rows[0]);
     return res.json(result.rows);
   } catch (error) {
-    console.log(error);
     return res.json({
       error: error.message,
       message: "Unexpected error occured",

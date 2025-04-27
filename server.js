@@ -17,7 +17,7 @@ import { educationRouter } from "./routes/education.router.js";
 import { certificationRouter } from "./routes/certification.router.js";
 import { badgeRouter } from "./routes/badge.router.js";
 import { analyticsRouter } from "./routes/analytics.router.js";
-import { serverRateLimit } from "./auth/middleware.js";
+import { isAuthenticated, serverRateLimit } from "./auth/middleware.js";
 
 // Load environment variables
 dotenv.config();
@@ -52,9 +52,8 @@ app.use(
     origin: [
       `${process.env.FRONTEND_URL}`,
       "http://localhost:3000",
+      "http://localhost:5173",
       "https://gemechuadam.com",
-      "https://680a56e3a2221100083b3f9f--gemechuadam.netlify.app/",
-      "https://gemechuadam-backend.netlify.app",
     ],
     credentials: true,
   })
@@ -76,7 +75,7 @@ app.use("/api", experienceRouter);
 app.use("/api", educationRouter);
 app.use("/api", certificationRouter);
 app.use("/api", badgeRouter);
-app.use("/api", analyticsRouter);
+app.use("/api", isAuthenticated, analyticsRouter);
 // Basic route
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to the API" });
