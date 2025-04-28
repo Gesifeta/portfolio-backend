@@ -20,9 +20,14 @@ dotenv.config();
 // Initialize express app
 const app = express();
 // Middleware
-app.use("/", serverRateLimit);
-app.use(express.json());
+app.use(
+  express.json({
+    limit: "50mb",
+    extended: true,
+  })
+);
 app.use(cookieParser());
+app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
     origin: [
@@ -34,17 +39,17 @@ app.use(
       "https://gemechuadam-backend.netlify.app",
     ],
     credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
-app.use(express.urlencoded({ extended: true }));
 // set images folder as static
 // In server.js
 // Add this after your middleware configurations
 // Create an 'uploads' directory to store images
-
+app.use("/", serverRateLimit);
 app.use("/api/uploads", express.static(path.join(__dirname, "uploads")));
 app.use("/api/images", express.static(path.join(__dirname, "uploads")));
-app.use(express.urlencoded({ limit: "50mb", extended: true }));
 // user router
 app.use("/api/", userRouter);
 app.use("/api/", skillRouter);
