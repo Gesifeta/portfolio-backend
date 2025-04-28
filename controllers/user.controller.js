@@ -90,6 +90,13 @@ export const registerUser = async (req, res) => {
 export const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
+    // validate email and password
+    if (!email || !password) {
+      return res.status(400).json({
+        message: "Please provide email and password",
+        error: "Invalid credentials",
+      });
+    }
     // check if user is registered
     const queryString = `SELECT * FROM users WHERE email = $1`;
     const params = [email];
