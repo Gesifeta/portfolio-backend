@@ -16,26 +16,26 @@ experienceRouter.get("/experiences", getAllExperiences);
 experienceRouter.post(
   "/experiences/new",
   isAuthenticated,
-
+  express.json(),
   addNewExperience
 );
 experienceRouter.delete(
   "/experiences/delete/experience/:id",
   isAuthenticated,
-
+  express.json(),
   deleteExperience
 );
 experienceRouter.put(
   "/experiences/update/experience/:id",
   isAuthenticated,
-
+  express.json(),
   updateExperience
 );
 experienceRouter.get("/experiences/experience/:id", getExperienceById);
 experienceRouter.post(
   "/experiences/experience/:id/upload",
   isAuthenticated,
-
+  express.json(),
   uploadExperienceImage,
   updateExperience
 );

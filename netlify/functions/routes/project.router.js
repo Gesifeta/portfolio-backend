@@ -18,7 +18,7 @@ export const projectRouter = express.Router();
 projectRouter.post(
   "/projects/new",
   isAuthenticated,
-
+  express.json(),
   addNewProject
 );
 projectRouter.get("/projects", getAllProjects);
@@ -28,6 +28,8 @@ projectRouter.get("/projects/project/:id", getProjectById);
 const upload = multer({ storage: fileStorageEngine });
 projectRouter.post(
   "/projects/upload",
+  isAuthenticated,
+  express.json(),
   upload.single("file"),
   uploadProjectImage
 );
@@ -35,11 +37,7 @@ projectRouter.post(
 projectRouter.put(
   "/projects/update/project/:id",
   isAuthenticated,
-
+  express.json(),
   updateProject
 );
-projectRouter.delete(
-  "/projects/delete/project/:id",
-  isAuthenticated,
-  deleteProject
-);
+projectRouter.delete("/projects/delete/project/:id", isAuthenticated, deleteProject);

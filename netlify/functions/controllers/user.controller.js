@@ -98,7 +98,7 @@ export const loginUser = async (req, res) => {
     if (!result) {
       return res.status(401).json({
         success: false,
-        message: `${(email, password)}`,
+        message: `email:${(email)} and ${password}`,
         error: "Invalid credentials",
       });
     }
