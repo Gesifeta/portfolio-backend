@@ -7,6 +7,7 @@ export const addNewCertification = async (req, res) => {
       id,
       user_id,
       title,
+      category,
       description,
       certification_number,
       certification_link,
@@ -16,11 +17,12 @@ export const addNewCertification = async (req, res) => {
       image_url,
       icon_url,
     } = JSON.parse(req.body);
-    const queryString = `INSERT INTO certifications (id, user_id, title, description, certification_number, certification_link, awarded_by, awarded_date, expiration_date, image_url, icon_url) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *`;
+    const queryString = `INSERT INTO certifications (id, user_id, title, category, description, certification_number, certification_link, awarded_by, awarded_date, expiration_date, image_url, icon_url) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING *`;
     const params = [
       id,
       user_id,
       title,
+      category,
       description,
       certification_number,
       certification_link,
