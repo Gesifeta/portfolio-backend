@@ -140,7 +140,6 @@ process.on("SIGINT", () => gracefulShutdown("SIGINT"));
 // Modify your unhandled rejection handler
 process.on("unhandledRejection", (err) => {
   console.log("UNHANDLED REJECTION! 💥 Shutting down...");
-  console.log(err.name, err.message);
   gracefulShutdown("UNHANDLED REJECTION");
 });
 

@@ -97,8 +97,7 @@ export const loginUser = async (req, res) => {
 
     if (!result) {
       return res.status(401).json({
-        success: false,
-        message: `email:${email} and ${password}`,
+        message: "If your are not registered, please register to continue.",
         error: "Invalid credentials",
       });
     }
