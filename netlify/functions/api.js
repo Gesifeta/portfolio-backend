@@ -13,6 +13,7 @@ import { educationRouter } from "./routes/education.router.js";
 import { certificationRouter } from "./routes/certification.router.js";
 import { badgeRouter } from "./routes/badge.router.js";
 import { analyticsRouter } from "./routes/analytics.router.js";
+import { userSkillSetsRouter } from "./routes/userSkillSets.router.js";
 import { serverRateLimit } from "./auth/middleware.js";
 
 // Load environment variables
@@ -52,6 +53,7 @@ app.use("/api/", educationRouter);
 app.use("/api/", certificationRouter);
 app.use("/api/", badgeRouter);
 app.use("/api/", analyticsRouter);
+app.use("/api/", userSkillSetsRouter);
 // Basic route
 app.get("/api/", (req, res) => {
   res.json({ message: "Welcome to the API" });
