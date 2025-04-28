@@ -21,6 +21,25 @@ import { isAuthenticated, serverRateLimit } from "./auth/middleware.js";
 
 // Load environment variables
 dotenv.config();
+// function to connect to database
+async function testDatabase(params) {
+  const pool = getPool();
+  try {
+    const result = await pool.query("SELECT NOW()");
+    return result.rows[0].now;
+  } catch (err) {
+    console.error("Error executing query", err);
+    throw err;
+  }
+}
+testDatabase()
+  .then((result) => {
+    console.log("Database is running OK:", result);
+  })
+  .catch((err) => {
+    console.error("Error during database query:", err);
+    closePool();
+  });
 // Initialize express app
 const app = express();
 const port = process.env.EXPRESS_SERVER_PORT || 5000;

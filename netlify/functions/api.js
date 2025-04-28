@@ -4,11 +4,7 @@ import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import path from "path";
 import ServerlessHttp from "serverless-http";
-// import { fileURLToPath } from "url";
-// // const __filename = fileURLToPath(import.meta.url);
-// const __dirname = path.dirname(__filename);
 
-import { getPool, closePool } from "./database/db.js";
 import { userRouter } from "./routes/user.router.js";
 import { skillRouter } from "./routes/skill.router.js";
 import { projectRouter } from "./routes/project.router.js";
@@ -21,25 +17,6 @@ import { serverRateLimit } from "./auth/middleware.js";
 
 // Load environment variables
 dotenv.config();
-// function to connect to database
-async function testDatabase(params) {
-  const pool = getPool();
-  try {
-    const result = await pool.query("SELECT NOW()");
-    return result.rows[0].now;
-  } catch (err) {
-    console.error("Error executing query", err);
-    throw err;
-  }
-}
-testDatabase()
-  .then((result) => {
-    console.log("Database is running OK:", result);
-  })
-  .catch((err) => {
-    console.error("Error during database query:", err);
-    closePool();
-  });
 // Initialize express app
 const app = express();
 const port = process.env.EXPRESS_SERVER_PORT || 5000;
