@@ -28,7 +28,6 @@ projectRouter.get("/projects/project/:id", getProjectById);
 const upload = multer({ storage: fileStorageEngine });
 projectRouter.post(
   "/projects/upload",
-  express.json(),
   upload.single("file"),
   uploadProjectImage
 );

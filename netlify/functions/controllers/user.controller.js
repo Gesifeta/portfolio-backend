@@ -82,7 +82,7 @@ export const registerUser = async (req, res) => {
   } catch (error) {
     return res.json({
       error: error.message,
-      message: "Unexpected error occured",
+      message: error.message,
     });
   }
 };
