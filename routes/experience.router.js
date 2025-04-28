@@ -12,7 +12,7 @@ import {
 // routes for the experiences
 export const experienceRouter = express.Router();
 experienceRouter.get("/experiences", getAllExperiences);
-experienceRouter.post("/experiences/new", express.json(), addNewExperience);
+experienceRouter.post("/experiences/new", addNewExperience);
 experienceRouter.delete("/experiences/:id", deleteExperience);
 experienceRouter.put("/experiences/:id", updateExperience);
 experienceRouter.get("/experiences/:id", getExperienceById);

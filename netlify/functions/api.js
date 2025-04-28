@@ -3,9 +3,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import path from "path";
-
 import ServerlessHttp from "serverless-http";
-
 
 import { userRouter } from "./routes/user.router.js";
 import { skillRouter } from "./routes/skill.router.js";
@@ -23,6 +21,13 @@ dotenv.config();
 const app = express();
 // Middleware
 app.use("/", serverRateLimit);
+app.use(
+  express.json({
+    limit: "50mb",
+    extended: true,
+    parameterLimit: 50000,
+  })
+);
 app.use(cookieParser());
 app.use(
   cors({
@@ -81,4 +86,4 @@ app.use((req, res, next) => {
   next();
 });
 
- export const handler = ServerlessHttp(app);
+export const handler = ServerlessHttp(app);

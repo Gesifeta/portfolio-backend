@@ -23,8 +23,8 @@ import { isAuthenticated } from "../auth/middleware.js";
 export const userRouter = express.Router();
 //register user route
 userRouter.get("/user/auth", isAuthenticated);
-userRouter.post("/users/register/new", express.json(), registerUser);
-userRouter.post("/users/login", express.json(), loginUser);
+userRouter.post("/users/register/new", registerUser);
+userRouter.post("/users/login", loginUser);
 userRouter.get("/users", isAuthenticated, getAllUsers);
 userRouter.get("/users/user/email/:email", isAuthenticated, getUserByEmail);
 userRouter.get(
@@ -36,31 +36,31 @@ userRouter.get("/users/user/id/:id", isAuthenticated, getUserById);
 userRouter.put(
   "/users/user/id/:id/update",
   isAuthenticated,
-  express.json(),
+
   updateUser
 );
 userRouter.put(
   "/users/user/id/:id/update/password",
   isAuthenticated,
-  express.json(),
+
   updateUserPassword
 );
 userRouter.put(
   "/users/user/id/:id/update/email",
   isAuthenticated,
-  express.json(),
+
   updateUserEmail
 );
 userRouter.put(
   "/users/user/id/:id/update/username",
   isAuthenticated,
-  express.json(),
+
   updateUserUsername
 );
 userRouter.put(
   "/users/user/id/:id/update/image_url",
   isAuthenticated,
-  express.json(),
+
   updateUserImage_url
 );
 userRouter.delete("/users/user/id/:id/delete", isAuthenticated, deleteUser);
