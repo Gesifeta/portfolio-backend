@@ -12,8 +12,8 @@ import {
 export const skillRouter = express.Router();
 
 skillRouter.get("/skills", getAllSkills);
-skillRouter.post("/skills/new", express.json(), addNewSkill);
+skillRouter.post("/skills/new", addNewSkill);
 skillRouter.get("/skills/:id", getSkillById);
-skillRouter.put("/skills/:id", express.json(), updateSkill);
+skillRouter.put("/skills/:id", updateSkill);
 skillRouter.delete("/skills/:id", deleteSkill);
 skillRouter.get("/skills/user/:id", getSkillsByUserId);

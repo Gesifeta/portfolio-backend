@@ -11,13 +11,10 @@ import {
 export const certificationRouter = express.Router();
 certificationRouter.post(
   "/certifications/new",
-  express.json(),
+
   addNewCertification
 );
 certificationRouter.get("/certifications", getAllCertifications);
-certificationRouter.put(
-  "/certifications/:id",
-  updateCertification
-);
+certificationRouter.put("/certifications/:id", updateCertification);
 certificationRouter.delete("/certifications/:id", deleteCertification);
 certificationRouter.get("/certifications/user/:id", getCertificationByUserId);

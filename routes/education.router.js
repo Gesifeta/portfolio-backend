@@ -1,4 +1,3 @@
-
 import express from "express";
 import {
   addNewEducation,
@@ -10,8 +9,8 @@ import {
 
 export const educationRouter = express.Router();
 educationRouter.get("/educations", getAllEducations);
-educationRouter.post("/educations/new", express.json(), addNewEducation);
+educationRouter.post("/educations/new", addNewEducation);
 educationRouter.get("/educations/:id", getEducationById);
 educationRouter.delete("/educations/:id", deleteEducation);
-educationRouter.put("/educations/:id", express.json(), updateEducation);
+educationRouter.put("/educations/:id", updateEducation);
 educationRouter.get("/educations/user/:id", getEducationById);

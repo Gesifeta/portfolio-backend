@@ -10,10 +10,9 @@ import {
 } from "../controllers/badge.controller.js";
 
 export const badgeRouter = express.Router();
-badgeRouter.post("/badges/new", express.json(), addNewBadge);
+badgeRouter.post("/badges/new", addNewBadge);
 badgeRouter.get("/badges", getAllBadges);
 badgeRouter.get("/badge/:id", getBadgeById);
 badgeRouter.get("/badge/user/:id", getBadgeByUserId);
-badgeRouter.put("badge/update/:id", express.json(), updateBadge);
+badgeRouter.put("badge/update/:id", updateBadge);
 badgeRouter.delete("badge/delete/:id", deleteBadge);
-
