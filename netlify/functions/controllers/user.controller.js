@@ -90,7 +90,6 @@ export const registerUser = async (req, res) => {
 export const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
-    console.log("email",email)
     // check if user is registered
     const queryString = `SELECT * FROM users WHERE email = $1`;
     const params = [email];
@@ -99,7 +98,7 @@ export const loginUser = async (req, res) => {
     if (!result) {
       return res.status(401).json({
         success: false,
-        message: `email:${(email)} and ${password}`,
+        message: `email:${email} and ${password}`,
         error: "Invalid credentials",
       });
     }
