@@ -37,7 +37,9 @@ export const getAllSkillSets = async (req, res) => {
 export const getSkillSetsByUserId = async (req, res) => {
   try {
     const { id } = req.params;
-    const queryString = `SELECT * FROM user_skill_sets WHERE user_id = $1`;
+    const queryString = `SELECT skills.id, user_skill_sets.id, name, category,
+    description, image_url FROM skills JOIN user_skill_sets ON skills.id = user_skill_sets.skill_id 
+    WHERE user_skill_sets.user_id = $1`;
     const params = [id];
     const result = await ordinaryDatabaseQuery(queryString, params);
     if (result.rowCount === 0) {
@@ -47,6 +49,7 @@ export const getSkillSetsByUserId = async (req, res) => {
     }
     return res.json(result.rows);
   } catch (error) {
+    console.log(error);
     return res.json({
       error: error.message,
       message: "Unexpected error occured",
@@ -196,4 +199,3 @@ export const updateSkillSetById = async (req, res) => {
     });
   }
 };
-
