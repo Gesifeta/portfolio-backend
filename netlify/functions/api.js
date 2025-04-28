@@ -19,8 +19,6 @@ import { serverRateLimit } from "./auth/middleware.js";
 dotenv.config();
 // Initialize express app
 const app = express();
-const port = process.env.EXPRESS_SERVER_PORT || 5000;
-
 // Middleware
 app.use("/", serverRateLimit);
 app.use(cookieParser());
@@ -44,7 +42,6 @@ app.use(express.urlencoded({ extended: true }));
 // Create an 'uploads' directory to store images
 
 app.use("/api/uploads", express.static(path.join(__dirname, "uploads")));
-
 app.use("/api/images", express.static(path.join(__dirname, "uploads")));
 // user router
 app.use("/api/", userRouter);

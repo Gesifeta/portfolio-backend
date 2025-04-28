@@ -81,7 +81,7 @@ export const registerUser = async (req, res) => {
     });
   } catch (error) {
     return res.json({
-      error: error.message,
+      error: error,
       message: error.message,
     });
   }
@@ -94,9 +94,11 @@ export const loginUser = async (req, res) => {
     const queryString = `SELECT * FROM users WHERE email = $1`;
     const params = [email];
     const result = (await ordinaryDatabaseQuery(queryString, params)).rows[0];
+
     if (!result) {
       return res.status(401).json({
-        message: "If your are not registered, please register to continue.",
+        success: false,
+        message: `${(email, password)}`,
         error: "Invalid credentials",
       });
     }

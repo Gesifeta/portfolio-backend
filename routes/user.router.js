@@ -15,8 +15,8 @@ import { isAuthenticated } from "../auth/middleware.js";
 export const userRouter = express.Router();
 //register user route
 userRouter.get("/user/auth", isAuthenticated);
-userRouter.post("/users/register/new",express.json(),  registerUser);
-userRouter.post("/users/login",express.json(),  loginUser);
+userRouter.post("/users/register/new", express.json(), registerUser);
+userRouter.post("/users/login", express.json(), loginUser);
 userRouter.get("/users", getAllUsers);
 userRouter.get("/users/email/:email", getUserByEmail);
 userRouter.get("/users/username/:username", getUserByUser_name);
