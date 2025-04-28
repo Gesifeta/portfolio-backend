@@ -3,7 +3,9 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import path from "path";
+
 import ServerlessHttp from "serverless-http";
+
 
 import { userRouter } from "./routes/user.router.js";
 import { skillRouter } from "./routes/skill.router.js";
@@ -43,7 +45,6 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/uploads", express.static(path.join(__dirname, "uploads")));
 app.use("/api/images", express.static(path.join(__dirname, "uploads")));
-app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
 // user router
 app.use("/api/", userRouter);
@@ -80,4 +81,4 @@ app.use((req, res, next) => {
   next();
 });
 
-export const handler = ServerlessHttp(app);
+ export const handler = ServerlessHttp(app);
