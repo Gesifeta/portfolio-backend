@@ -21,13 +21,7 @@ dotenv.config();
 const app = express();
 // Middleware
 app.use("/", serverRateLimit);
-app.use(
-  express.json({
-    limit: "50mb",
-    extended: true,
-    parameterLimit: 50000,
-  })
-);
+app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
