@@ -21,7 +21,7 @@ export const registerUser = async (req, res) => {
       last_name,
       image_url,
       bio,
-    } = req.body;
+    } = JSON.parse(req.body);
     // check if user is already registered
 
     if (await doesItExist(email, "users")) {
@@ -89,8 +89,8 @@ export const registerUser = async (req, res) => {
 // function to login user
 export const loginUser = async (req, res) => {
   try {
-    const { email, password } = req.body;
-    console.log(email, password)
+    const { email, password } = JSON.parse(req.body);
+    console.log(email, password);
     // validate email and password
     if (!email || !password) {
       return res.status(400).json({
@@ -174,7 +174,7 @@ export const getAllUsers = async (req, res) => {
 export const updateUser = async (req, res) => {
   try {
     const { id } = req.params;
-    const { user_name, email, password } = req.body;
+    const { user_name, email, password } = JSON.parse(req.body);
     const queryString = `UPDATE users SET user_name = $1, email = $2, password = $3 WHERE id = $4 RETURNING *`;
     const params = [user_name, email, password, id];
     const result = await ordinaryDatabaseQuery(queryString, params);
@@ -201,7 +201,7 @@ export const deleteUser = async (req, res) => {
 export const updateUserImage = async (req, res) => {
   try {
     const { id } = req.params;
-    const { image_url } = req.body;
+    const { image_url } = JSON.parse(req.body);
     const queryString = `UPDATE users SET image_url = $1 WHERE id = $2 RETURNING *`;
     const params = [image_url, id];
     const result = await ordinaryDatabaseQuery(queryString, params);
@@ -211,11 +211,11 @@ export const updateUserImage = async (req, res) => {
     return res.json(result.rows[0]);
   } catch (error) {}
 };
-//update user's role 
+//update user's role
 export const updateUserRole = async (req, res) => {
   try {
     const { id } = req.params;
-    const { role } = req.body;
+    const { role } = JSON.parse(req.body);
     const queryString = `UPDATE users SET role = $1 WHERE id = $2 RETURNING *`;
     const params = [role, id];
     const result = await ordinaryDatabaseQuery(queryString, params);
@@ -229,7 +229,7 @@ export const updateUserRole = async (req, res) => {
 export const updateUserStatus = async (req, res) => {
   try {
     const { id } = req.params;
-    const { status } = req.body;
+    const { status } = JSON.parse(req.body);
     const queryString = `UPDATE users SET status = $1 WHERE id = $2 RETURNING *`;
     const params = [status, id];
     const result = await ordinaryDatabaseQuery(queryString, params);
@@ -244,7 +244,7 @@ export const updateUserStatus = async (req, res) => {
 export const updateUserImageByEmail = async (req, res) => {
   try {
     const { email } = req.params;
-    const { image_url } = req.body;
+    const { image_url } = JSON.parse(req.body);
     const queryString = `UPDATE users SET image_url = $1 WHERE email = $2 RETURNING *`;
     const params = [image_url, email];
     const result = await ordinaryDatabaseQuery(queryString, params);

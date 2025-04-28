@@ -21,7 +21,7 @@ export const registerUser = async (req, res) => {
       last_name,
       image_url,
       bio,
-    } = req.body;
+    } = JSON.parse(req.body);
     // check if user is already registered
 
     if (await doesItExist(email, "users")) {
@@ -89,7 +89,7 @@ export const registerUser = async (req, res) => {
 // function to login user
 export const loginUser = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email, password } = JSON.parse(req.body);
     // check if user is registered
     const queryString = `SELECT * FROM users WHERE email = $1`;
     const params = [email];
@@ -158,7 +158,7 @@ export const logoutUser = async (req, res) => {
 export const updateUserImage_url = async (req, res) => {
   try {
     const { id } = req.params;
-    const { image_url } = req.body;
+    const { image_url } = JSON.parse(req.body);
     const queryString = `UPDATE users SET image_url = $1 WHERE id = $2 RETURNING *`;
     const params = [image_url, id];
     const result = await ordinaryDatabaseQuery(queryString, params);
@@ -194,7 +194,7 @@ export const getAllUsers = async (req, res) => {
 export const updateUser = async (req, res) => {
   try {
     const { id } = req.params;
-    const { user_name, email, password } = req.body;
+    const { user_name, email, password } = JSON.parse(req.body);
     const queryString = `UPDATE users SET user_name = $1, email = $2, password = $3 WHERE id = $4 RETURNING *`;
     const params = [user_name, email, password, id];
     const result = await ordinaryDatabaseQuery(queryString, params);
@@ -286,7 +286,7 @@ export const getUserByUser_nameOrEmailOrPasswordOrId = async (req, res) => {
 export const updateUserPassword = async (req, res) => {
   try {
     const { id } = req.params;
-    const { password } = req.body;
+    const { password } = JSON.parse(req.body);
     const queryString = `UPDATE users SET password = $1 WHERE id = $2 RETURNING *`;
     const params = [password, id];
     const result = await ordinaryDatabaseQuery(queryString, params);
@@ -300,7 +300,7 @@ export const updateUserPassword = async (req, res) => {
 export const updateUserEmail = async (req, res) => {
   try {
     const { id } = req.params;
-    const { email } = req.body;
+    const { email } = JSON.parse(req.body);
     const queryString = `UPDATE users SET email = $1 WHERE id = $2 RETURNING *`;
     const params = [email, id];
     const result = await ordinaryDatabaseQuery(queryString, params);
@@ -314,7 +314,7 @@ export const updateUserEmail = async (req, res) => {
 export const updateUserUsername = async (req, res) => {
   try {
     const { id } = req.params;
-    const { user_name } = req.body;
+    const { user_name } = JSON.parse(req.body);
     const queryString = `UPDATE users SET user_name = $1 WHERE id = $2 RETURNING *`;
     const params = [user_name, id];
     const result = await ordinaryDatabaseQuery(queryString, params);

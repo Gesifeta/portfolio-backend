@@ -15,7 +15,7 @@ export const addNewCertification = async (req, res) => {
       expiration_date,
       image_url,
       icon_url,
-    } = req.body;
+    } = JSON.parse(req.body);
     const queryString = `INSERT INTO certifications (id, user_id, title, description, certification_number, certification_link, awarded_by, awarded_date, expiration_date, image_url, icon_url) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *`;
     const params = [
       id,
@@ -102,7 +102,7 @@ export const updateCertification = async (req, res) => {
       expiration_date,
       image_url,
       icon_url,
-    } = req.body;
+    } = JSON.parse(req.body);
     const queryString = `UPDATE certifications SET title = $1, description = $2, certification_number = $3, certification_link = $4, awarded_by = $5, awarded_date = $6, expiration_date = $7, image_url = $8, icon_url = $9 WHERE id = $10 RETURNING *`;
     const params = [
       title,
@@ -146,4 +146,3 @@ export const deleteCertification = async (req, res) => {
     });
   }
 };
-
