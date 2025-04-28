@@ -12,7 +12,6 @@ import { isAuthenticated } from "../auth/middleware.js";
 export const certificationRouter = express.Router();
 certificationRouter.post(
   "/certifications/new",
-  isAuthenticated,
   express.json(),
   addNewCertification
 );
