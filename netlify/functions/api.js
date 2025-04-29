@@ -34,11 +34,7 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin: [
-      "https://gemechuadam.com",
-      "http://localhost:5173",
-      "http://localhost:3000",
-    ],
+    origin: "https://gemechuadam.com",
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
