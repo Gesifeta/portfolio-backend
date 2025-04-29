@@ -34,7 +34,10 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin: "https://gemechuadam.com",
+    origin: [
+      "https://gemechuadam.com",
+      "http://localhost:5173",
+    ],
     credentials: true,
   })
 );
@@ -43,8 +46,8 @@ app.use(
 // Add this after your middleware configurations
 // Create an 'uploads' directory to store images
 app.use("/", serverRateLimit);
-app.use("/api/uploads", express.static(path.join(__dirname, "uploads")));
-app.use("/api/images", express.static(path.join(__dirname, "uploads")));
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+app.use("/images", express.static(path.join(__dirname, "uploads")));
 // user router
 app.use("/api/", userRouter);
 app.use("/api/", skillRouter);
@@ -74,16 +77,12 @@ app.use((req, res, next) => {
     "Access-Control-Allow-Methods",
     "GET, POST, PUT, DELETE, OPTIONS"
   );
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization"
-  );
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
   res.setHeader("Access-Control-Allow-Credentials", "true");
   if (req.method === "OPTIONS") {
     return res.sendStatus(200);
   }
   next();
 });
-// const server = app.listen(8000, () => {
-//   console.log(`Server is running on port 8000`);
-// });
-
+// rs
 export const handler = ServerlessHttp(app);
