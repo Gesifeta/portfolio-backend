@@ -152,7 +152,6 @@ export const uploadProjectImage = async (req, res) => {
     const result = await ordinaryDatabaseQuery(queryString, params);
     return res.json(path);
   } catch (error) {
-    console.log(error);
     return res.json({
       error: error.message,
       message: "Unexpected error occured",
