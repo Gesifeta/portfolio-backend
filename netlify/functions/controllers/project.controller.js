@@ -140,7 +140,7 @@ export const updateProject = async (req, res) => {
 //upload image
 export const uploadProjectImage = async (req, res) => {
   try {
-    if (!JSON.parse(req.file);) {
+    if (!JSON.parse(req.file)) {
       return res.json({
         message: "No file uploaded",
       });
