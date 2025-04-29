@@ -140,7 +140,7 @@ export const updateProject = async (req, res) => {
 //upload image
 export const uploadProjectImage = async (req, res) => {
   try {
-    if (!JSON.parse(req.file)) {
+    if (!req.file) {
       return res.json({
         message: "No file uploaded",
       });
@@ -152,6 +152,7 @@ export const uploadProjectImage = async (req, res) => {
     const result = await ordinaryDatabaseQuery(queryString, params);
     return res.json(path);
   } catch (error) {
+    console.log(error);
     return res.json({
       error: error.message,
       message: "Unexpected error occured",

@@ -15,9 +15,9 @@ import { badgeRouter } from "./routes/badge.router.js";
 import { analyticsRouter } from "./routes/analytics.router.js";
 import { userSkillSetsRouter } from "./routes/userSkillSets.router.js";
 import { serverRateLimit } from "./auth/middleware.js";
-// import { fileURLToPath } from "url";
-// const __filename = fileURLToPath(import.meta.url);
-// const __dirname = path.dirname(__filename);
+import { fileURLToPath } from "url";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Load environment variables
 dotenv.config();
@@ -68,7 +68,7 @@ app.get("/api/", (req, res) => {
 
 // Error handling middleware
 app.use((err, req, res, next) => {
-
+  console.log(err);
   res.status(500).json({
     message: err.message,
     error: process.env.NODE_ENV === "development" ? err.message : undefined,
@@ -87,8 +87,8 @@ app.use((req, res, next) => {
   }
   next();
 });
-// const server = app.listen(8000, () => {
-//   console.log(`Server is running on port 8000`);
-// });
+const server = app.listen(8000, () => {
+  console.log(`Server is running on port 8000`);
+});
 
 export const handler = ServerlessHttp(app);
