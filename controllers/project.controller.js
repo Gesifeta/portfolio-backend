@@ -43,11 +43,7 @@ export const getAllProjects = async (req, res) => {
   try {
     const queryString = `SELECT * FROM projects`;
     const result = await ordinaryDatabaseQuery(queryString);
-    if (result.rowCount === 0) {
-      return res.json({
-        message: "No categories found",
-      });
-    }
+
     return res.json(result.rows);
   } catch (error) {
     return res.json({
