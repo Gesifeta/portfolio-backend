@@ -36,8 +36,6 @@ app.use(
   cors({
     origin: "https://gemechuadam.com",
     credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 // set images folder as static
