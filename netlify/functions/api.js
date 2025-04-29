@@ -68,8 +68,9 @@ app.get("/api/", (req, res) => {
 
 // Error handling middleware
 app.use((err, req, res, next) => {
+
   res.status(500).json({
-    message: "Something went wrong!",
+    message: err.message,
     error: process.env.NODE_ENV === "development" ? err.message : undefined,
   });
 });
