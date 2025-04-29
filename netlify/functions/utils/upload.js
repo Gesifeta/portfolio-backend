@@ -57,17 +57,17 @@ const fileStorageEngine = multer.diskStorage({
       mimetype.startsWith("video/") &&
       validVideoMimeTypes.includes(mimetype)
     ) {
-      cb(null, "uploads/videos");
+      cb(null, "netlify/functions/uploads/videos");
     } else if (
       mimetype.startsWith("image/") &&
       validImageMimeTypes.includes(mimetype)
     ) {
-      cb(null, "uploads/images");
+      cb(null, "netlify/functions/uploads/images");
     } else if (
       mimetype.startsWith("application/") &&
       validDocumentMimeTypes.includes(mimetype)
     ) {
-      cb(null, "uploads/documents");
+      cb(null, "netlify/functions/uploads/documents");
     }
     // invalid file types
     else {
