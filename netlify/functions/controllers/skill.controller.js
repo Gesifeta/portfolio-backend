@@ -5,11 +5,6 @@ export const getAllSkills = async (req, res) => {
   try {
     const queryString = `SELECT * FROM skills`;
     const result = await ordinaryDatabaseQuery(queryString);
-    if (result.rowCount === 0) {
-      return res.json({
-        message: "No skills found",
-      });
-    }
     // Return the skills
     return res.json(result.rows);
   } catch (error) {
