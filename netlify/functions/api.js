@@ -15,9 +15,9 @@ import { badgeRouter } from "./routes/badge.router.js";
 import { analyticsRouter } from "./routes/analytics.router.js";
 import { userSkillSetsRouter } from "./routes/userSkillSets.router.js";
 import { serverRateLimit } from "./auth/middleware.js";
-import { fileURLToPath } from "url";
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// import { fileURLToPath } from "url";
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
 
 // Load environment variables
 dotenv.config();
@@ -74,15 +74,16 @@ app.use((req, res, next) => {
     "Access-Control-Allow-Methods",
     "GET, POST, PUT, DELETE, OPTIONS"
   );
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization"
+  );
   res.setHeader("Access-Control-Allow-Credentials", "true");
   if (req.method === "OPTIONS") {
     return res.sendStatus(200);
   }
   next();
 });
-const server = app.listen(8000, () => {
-  console.log(`Server is running on port 8000`);
-});
+// const server = app.listen(8000, () => {
+//   console.log(`Server is running on port 8000`);
+// });
 
 export const handler = ServerlessHttp(app);
