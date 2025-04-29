@@ -48,6 +48,7 @@ app.use(
 app.use("/", serverRateLimit);
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use("/images", express.static(path.join(__dirname, "uploads")));
+
 // user router
 app.use("/api/", userRouter);
 app.use("/api/", skillRouter);
@@ -84,5 +85,7 @@ app.use((req, res, next) => {
   }
   next();
 });
-// rs
+// const server = app.listen(8000, () => {
+//   console.log(`Server is running on port 8000`);
+// });
 export const handler = ServerlessHttp(app);

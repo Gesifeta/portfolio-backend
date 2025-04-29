@@ -1,6 +1,5 @@
 import express from "express";
-import multer from "multer";
-import { fileStorageEngine } from "../utils/upload.js";
+import { upload } from "../utils/upload.js";
 import { isAuthenticated } from "../auth/middleware.js";
 
 import {
@@ -24,8 +23,6 @@ projectRouter.post(
 projectRouter.get("/projects", getAllProjects);
 projectRouter.get("/projects/project/:id", getProjectById);
 // upload images using multer
-
-const upload = multer({ storage: fileStorageEngine });
 projectRouter.post(
   "/projects/upload",
   upload.single("file"),
@@ -35,7 +32,6 @@ projectRouter.post(
 projectRouter.put(
   "/projects/update/project/:id",
   isAuthenticated,
-
   updateProject
 );
 projectRouter.delete(

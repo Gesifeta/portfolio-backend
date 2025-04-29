@@ -1,7 +1,7 @@
 import multer from "multer";
 
 // Setting up multer
-export const fileStorageEngine = multer.diskStorage({
+const fileStorageEngine = multer.diskStorage({
   destination: (req, file, cb) => {
     // check if upload is inappropriate image types
     const mimetype = file.mimetype;
@@ -53,22 +53,21 @@ export const fileStorageEngine = multer.diskStorage({
       "application/vnd.oasis.opendocument.formula",
       "text/csv",
     ];
-
     if (
       mimetype.startsWith("video/") &&
       validVideoMimeTypes.includes(mimetype)
     ) {
-      cb(null, "netlify/functions/uploads/videos");
+      cb(null, "uploads/videos");
     } else if (
       mimetype.startsWith("image/") &&
       validImageMimeTypes.includes(mimetype)
     ) {
-      cb(null, "netlify/functions/uploads/images");
+      cb(null, "uploads/images");
     } else if (
       mimetype.startsWith("application/") &&
       validDocumentMimeTypes.includes(mimetype)
     ) {
-      cb(null, "netlify/functions/uploads/documents");
+      cb(null, "uploads/documents");
     }
     // invalid file types
     else {
@@ -79,5 +78,11 @@ export const fileStorageEngine = multer.diskStorage({
     const ext = file.mimetype.split("/")[1];
     const fileName = `${file.originalname}-${Date.now()}.${ext}`;
     cb(null, fileName);
+  },
+});
+export const upload = multer({
+  storage: fileStorageEngine,
+  limits: {
+    fileSize: 5 * 1024 * 1024, // 5MB limit
   },
 });
