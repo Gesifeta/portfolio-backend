@@ -146,7 +146,7 @@ export const uploadProjectImage = async (req, res) => {
       });
     }
     const { id } = JSON.parse(req.body);
-    const { path } = JSON.parse(req.file);
+    const { path } = req.file;
     const queryString = `UPDATE projects SET image_url =$1 WHERE id=$2 RETURNING image_url`;
     const params = [path, id];
     const result = await ordinaryDatabaseQuery(queryString, params);
