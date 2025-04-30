@@ -131,14 +131,14 @@ export const deleteExperience = async (req, res) => {
 // upload image
 export const uploadExperienceImage = async (req, res) => {
   try {
-    if (!JSON.parse(req.file)) {
+    if (!JSON.parse(JSON.parse(req.file))) {
       return res.json({
         message: "No file uploaded",
       });
     }
 
     const { id } = JSON.parse(req.body);
-    const { path } = JSON.parse(req.file);
+    const { path } = JSON.parse(JSON.parse(req.file));
     const queryString = `UPDATE experiences SET image_url =$1 WHERE id=$2 RETURNING image_url`;
     const params = [image_url, id];
     const result = await ordinaryDatabaseQuery(queryString, params);

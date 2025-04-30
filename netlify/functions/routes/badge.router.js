@@ -15,7 +15,7 @@ import { upload } from "../utils/upload.js";
 import { isAuthenticated } from "../auth/middleware.js";
 
 export const badgeRouter = express.Router();
-badgeRouter.post("/badges/new", upload.single("file"),imageUrlMiddleware, addNewBadge);
+badgeRouter.post("/badges/new",  addNewBadge);
 badgeRouter.get("/badges", getAllBadges);
 badgeRouter.get("/badges/badge/:id", getBadgeById);
 badgeRouter.get("/badges/badge/user/:id", isAuthenticated, getBadgeByUserId);

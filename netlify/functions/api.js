@@ -14,6 +14,7 @@ import { certificationRouter } from "./routes/certification.router.js";
 import { badgeRouter } from "./routes/badge.router.js";
 import { analyticsRouter } from "./routes/analytics.router.js";
 import { userSkillSetsRouter } from "./routes/userSkillSets.router.js";
+import { uploadRouter } from "./routes/upload.router.js";
 import { serverRateLimit } from "./auth/middleware.js";
 // import { fileURLToPath } from "url";
 // const __filename = fileURLToPath(import.meta.url);
@@ -34,10 +35,7 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin: [
-      "https://gemechuadam.com",
-      "http://localhost:5173",
-    ],
+    origin: ["https://gemechuadam.com", "http://localhost:5173"],
     credentials: true,
   })
 );
@@ -59,6 +57,7 @@ app.use("/api/", certificationRouter);
 app.use("/api/", badgeRouter);
 app.use("/api/", analyticsRouter);
 app.use("/api/", userSkillSetsRouter);
+app.use("/api/", uploadRouter);
 // Basic route
 app.get("/api/", (req, res) => {
   res.json({ message: "Welcome to the API" });
@@ -76,7 +75,8 @@ app.use((err, req, res, next) => {
 app.use((req, res, next) => {
   res.setHeader(
     "Access-Control-Allow-Methods",
-    "GET, POST, PUT, DELETE, OPTIONS"
+    "GET, POST, PUT, DELETE, OPTIONS",
+
   );
   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
   res.setHeader("Access-Control-Allow-Credentials", "true");

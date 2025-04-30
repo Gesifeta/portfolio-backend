@@ -131,7 +131,7 @@ export const deleteExperience = async (req, res) => {
 // upload image
 export const uploadExperienceImage = async (req, res) => {
   try {
-    if (!req.file) {
+    if (!JSON.parse(req.file)) {
       return res.json({
         message: "No file uploaded",
       });

@@ -13,7 +13,7 @@ export const addNewBadge = async (req, res) => {
       awarded_by,
       awarded_date,
       image_url,
-    } = JSON.parse(req.body);
+    } = JSON.parse(req.file);
     const queryString = `INSERT INTO badges (id, user_id, title, description, skills, badge_link, awarded_by, awarded_date, image_url) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *`;
     const params = [
       id,

@@ -120,7 +120,7 @@ export const loginUser = async (req, res) => {
         sameSite: "lax",
         path: "/",
       });
-
+      console.log("Token", token);
       return res.json({
         message: "User logged in successfully",
         user: {
