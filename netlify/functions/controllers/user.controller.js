@@ -1,4 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 import {
   generateSalt,
@@ -61,6 +64,7 @@ export const registerUser = async (req, res) => {
       last_name: result.rows[0].last_name,
       image_url: result.rows[0].image_url,
     });
+    console.log("Website: ",process.env.FRONTEND_URL)
     // set token in cookie
     res.cookie("token", token, {
       httpOnly: true,
