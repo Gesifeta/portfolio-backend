@@ -67,6 +67,10 @@ export const registerUser = async (req, res) => {
       secure: process.env.NODE_ENV === "production",
       maxAge: 60 * 60 * 24 * 1000,
       sameSite: "none",
+      domain:
+        process.env.NODE_ENV === "production"
+          ? process.env.FRONTEND_URL
+          : "localhost",
       path: "/",
     });
     // navigate to login
@@ -117,10 +121,13 @@ export const loginUser = async (req, res) => {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
         maxAge: 60 * 60 * 24 * 1000,
-        sameSite: "lax",
+        sameSite: "none",
+        domain:
+          process.env.NODE_ENV === "production"
+            ? process.env.FRONTEND_URL
+            : "localhost",
         path: "/",
       });
-      console.log("Token", token);
       return res.json({
         message: "User logged in successfully",
         user: {
