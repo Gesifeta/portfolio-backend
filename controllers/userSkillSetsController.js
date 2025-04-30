@@ -196,4 +196,3 @@ export const updateSkillSetById = async (req, res) => {
     });
   }
 };
-

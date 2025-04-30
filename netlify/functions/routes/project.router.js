@@ -1,6 +1,6 @@
 import express from "express";
 import { upload } from "../utils/upload.js";
-import { isAuthenticated } from "../auth/middleware.js";
+import { isAuthenticated, imageUrlMiddleware } from "../auth/middleware.js";
 
 import {
   addNewProject,
@@ -17,14 +17,16 @@ export const projectRouter = express.Router();
 projectRouter.post(
   "/projects/new",
   isAuthenticated,
-
+  upload.single("file"),
+  imageUrlMiddleware,
   addNewProject
 );
 projectRouter.get("/projects", getAllProjects);
 projectRouter.get("/projects/project/:id", getProjectById);
 // upload images using multer
-projectRouter.post(
-  "/projects/upload",
+projectRouter.put(
+  "/projects/updateImageUrl/project/:id",
+  isAuthenticated,
   upload.single("file"),
   uploadProjectImage
 );

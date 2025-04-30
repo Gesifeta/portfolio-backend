@@ -18,12 +18,17 @@ import {
   getUserByUser_nameOrEmailOrPassword,
   getUserByUser_nameOrEmailOrPasswordOrId,
 } from "../controllers/user.controller.js";
-import { isAuthenticated } from "../auth/middleware.js";
+import { upload } from "../utils/upload.js";
+import { isAuthenticated, imageUrlMiddleware } from "../auth/middleware.js";
 
 export const userRouter = express.Router();
 //register user route
 userRouter.get("/user/auth", isAuthenticated);
-userRouter.post("/users/register/new", registerUser);
+userRouter.post(
+  "/users/register/new",
+
+  registerUser
+);
 userRouter.post("/users/login", loginUser);
 userRouter.get("/users", isAuthenticated, getAllUsers);
 userRouter.get("/users/user/email/:email", isAuthenticated, getUserByEmail);
@@ -36,7 +41,8 @@ userRouter.get("/users/user/id/:id", isAuthenticated, getUserById);
 userRouter.put(
   "/users/user/id/:id/update",
   isAuthenticated,
-
+  upload.single("file"),
+  imageUrlMiddleware,
   updateUser
 );
 userRouter.put(
@@ -58,9 +64,10 @@ userRouter.put(
   updateUserUsername
 );
 userRouter.put(
-  "/users/user/id/:id/update/image_url",
+  "/users/user/id/:id/update/image",
   isAuthenticated,
-
+  upload.single("file"),
+  imageUrlMiddleware,
   updateUserImage_url
 );
 userRouter.delete("/users/user/id/:id/delete", isAuthenticated, deleteUser);

@@ -136,3 +136,22 @@ export const deleteBadge = async (req, res) => {
     });
   }
 };
+// upload badge image
+export const uploadBadgeImage = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { image_url } = JSON.parse(req.body);
+    const queryString = `UPDATE badges SET image_url = $1 WHERE id = $2 RETURNING *`;
+    const params = [image_url, id];
+    const result = await ordinaryDatabaseQuery(queryString, params);
+    if (result.rowCount === 0) {
+      return res.json({ message: "No badge found" });
+    }
+    return res.json(result.rows[0]);
+  } catch (error) {
+    return res.json({
+      error: error.message,
+      message: "Unexpected error occured",
+    });
+  }
+};

@@ -145,6 +145,8 @@ export const loginUser = async (req, res) => {
 export const logoutUser = async (req, res) => {
   try {
     res.clearCookie("token");
+    res.clearCookie("user");
+    res;
     return res.json({ message: "User logged out successfully" });
   } catch (error) {
     return res.json({
@@ -156,8 +158,8 @@ export const logoutUser = async (req, res) => {
 // function to update user image
 export const updateUserImage_url = async (req, res) => {
   try {
-    const { id } = req.params;
-    const { image_url } = JSON.parse(req.body);
+    const { id, image_url } = JSON.parse(req.body);
+
     const queryString = `UPDATE users SET image_url = $1 WHERE id = $2 RETURNING *`;
     const params = [image_url, id];
     const result = await ordinaryDatabaseQuery(queryString, params);
@@ -316,6 +318,48 @@ export const updateUserUsername = async (req, res) => {
     const { user_name } = JSON.parse(req.body);
     const queryString = `UPDATE users SET user_name = $1 WHERE id = $2 RETURNING *`;
     const params = [user_name, id];
+    const result = await ordinaryDatabaseQuery(queryString, params);
+    if (result.rows.length === 0) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    return res.json(result.rows[0]);
+  } catch (error) {}
+};
+// update user first name
+export const updateUserFirstName = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { first_name } = JSON.parse(req.body);
+    const queryString = `UPDATE users SET first_name = $1 WHERE id = $2 RETURNING *`;
+    const params = [first_name, id];
+    const result = await ordinaryDatabaseQuery(queryString, params);
+    if (result.rows.length === 0) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    return res.json(result.rows[0]);
+  } catch (error) {}
+};
+// update user last name
+export const updateUserLastName = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { last_name } = JSON.parse(req.body);
+    const queryString = `UPDATE users SET last_name = $1 WHERE id = $2 RETURNING *`;
+    const params = [last_name, id];
+    const result = await ordinaryDatabaseQuery(queryString, params);
+    if (result.rows.length === 0) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    return res.json(result.rows[0]);
+  } catch (error) {}
+};
+// update user role
+export const updateUserRole = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { role } = JSON.parse(req.body);
+    const queryString = `UPDATE users SET role = $1 WHERE id = $2 RETURNING *`;
+    const params = [role, id];
     const result = await ordinaryDatabaseQuery(queryString, params);
     if (result.rows.length === 0) {
       return res.status(404).json({ message: "User not found" });

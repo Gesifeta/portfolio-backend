@@ -6,8 +6,11 @@ import {
   updateCertification,
   deleteCertification,
   getCertificationByUserId,
+  getCertificationById,
+  uploadCertificationImage,
 } from "../controllers/certification.controller.js";
-import { isAuthenticated } from "../auth/middleware.js";
+import { isAuthenticated, imageUrlMiddleware } from "../auth/middleware.js";
+import { upload } from "../utils/upload.js";
 
 export const certificationRouter = express.Router();
 certificationRouter.post(
@@ -30,4 +33,14 @@ certificationRouter.delete(
 certificationRouter.get(
   "/certifications/certification/user/:id",
   getCertificationByUserId
+);
+certificationRouter.get(
+  "/certifications/certification/:id",
+  getCertificationById
+);
+certificationRouter.post(
+  "/certifications/certification/upload",
+  upload.single("file"),
+  imageUrlMiddleware,
+  uploadCertificationImage
 );

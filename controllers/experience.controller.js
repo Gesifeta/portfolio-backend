@@ -140,7 +140,7 @@ export const uploadExperienceImage = async (req, res) => {
     const { id } = JSON.parse(req.body);
     const { path } = JSON.parse(req.file);
     const queryString = `UPDATE experiences SET image_url =$1 WHERE id=$2 RETURNING image_url`;
-    const params = [path, id];
+    const params = [image_url, id];
     const result = await ordinaryDatabaseQuery(queryString, params);
     return res.json(path);
   } catch (error) {

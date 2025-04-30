@@ -5,8 +5,10 @@ import {
   getEducationById,
   deleteEducation,
   updateEducation,
+  uploadEducationImage,
 } from "../controllers/education.controller.js";
-import { isAuthenticated } from "../auth/middleware.js";
+import { isAuthenticated, imageUrlMiddleware } from "../auth/middleware.js";
+import { upload } from "../utils/upload.js";
 
 export const educationRouter = express.Router();
 educationRouter.get("/educations", getAllEducations);
@@ -29,3 +31,9 @@ educationRouter.put(
   updateEducation
 );
 educationRouter.get("/educations/education/user/:id", getEducationById);
+educationRouter.post(
+  "/educations/education/upload",
+  upload.single("file"),
+  imageUrlMiddleware,
+  uploadEducationImage
+);
