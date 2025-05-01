@@ -5,6 +5,7 @@ import { verifyToken } from "./authentication.js";
 // A middleware to check if user is authenticated
 export const isAuthenticated = (req, res, next) => {
   const token = req.cookies?.token;
+    console.log(token);
   if (!token) {
     return res
       .status(401)
@@ -13,6 +14,10 @@ export const isAuthenticated = (req, res, next) => {
   try {
     const decoded = verifyToken(token);
     req.user = decoded;
+    if (!req.user) {
+      return res.status(401).json({ message: "Invalid token" });
+    }
+  
     next();
   } catch (err) {
     return res.status(401).json({ message: "Invalid token" });
@@ -28,8 +33,8 @@ export const serverRateLimit = rateLimit({
 
 // image url middleware
 export const imageUrlMiddleware = (req, res, next) => {
-  if (JSON.parse(req.file)) {
-    JSON.parse(req.body).image_url = JSON.parse(req.file).path;
+  if (req.file) {
+    req.body.image_url = req.file.path;
   }
   next();
 };

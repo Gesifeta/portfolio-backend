@@ -15,7 +15,6 @@ educationRouter.get("/educations", getAllEducations);
 educationRouter.post(
   "/educations/new",
   isAuthenticated,
-
   addNewEducation
 );
 educationRouter.get("/educations/education/:id", getEducationById);
@@ -27,7 +26,6 @@ educationRouter.delete(
 educationRouter.put(
   "/educations/update/education/:id",
   isAuthenticated,
-
   updateEducation
 );
 educationRouter.get("/educations/education/user/:id", getEducationById);

@@ -15,8 +15,6 @@ import { upload } from "../utils/upload.js";
 export const certificationRouter = express.Router();
 certificationRouter.post(
   "/certifications/new",
-  isAuthenticated,
-
   addNewCertification
 );
 certificationRouter.get("/certifications", getAllCertifications);
