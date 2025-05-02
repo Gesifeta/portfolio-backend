@@ -40,7 +40,7 @@ export const addNewExperience = async (req, res) => {
 // Get all experiences
 export const getAllExperiences = async (req, res) => {
   try {
-    const queryString = `SELECT * FROM experiences ORDER BY end_year`;
+    const queryString = `SELECT * FROM experiences WHERE visible = 'true' ORDER BY end_year`;
     const result = await ordinaryDatabaseQuery(queryString, []);
     return res.json(result.rows);
   } catch (error) {

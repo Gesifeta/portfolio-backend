@@ -38,7 +38,7 @@ export const addNewBadge = async (req, res) => {
 // A function to get all badges
 export const getAllBadges = async (req, res) => {
   try {
-    const queryString = `SELECT * FROM badges`;
+    const queryString = `SELECT * FROM badges WHERE visible = 'true'`;
     const result = await ordinaryDatabaseQuery(queryString, []);
     return res.json(result.rows);
   } catch (error) {

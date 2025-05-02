@@ -49,7 +49,7 @@ export async function addNewEducation(req, res) {
 // A function to get all educations
 export async function getAllEducations(req, res) {
   try {
-    const queryString = `SELECT * FROM educations ORDER BY end_year`;
+    const queryString = `SELECT * FROM educations WHERE visible = 'true' ORDER BY end_year`;
     const result = await ordinaryDatabaseQuery(queryString, []);
     return res.json(result.rows);
   } catch (error) {

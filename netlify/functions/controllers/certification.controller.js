@@ -44,7 +44,7 @@ export const addNewCertification = async (req, res) => {
 // A fucntion to get all certifications
 export const getAllCertifications = async (req, res) => {
   try {
-    const queryString = `SELECT * FROM certifications`;
+    const queryString = `SELECT * FROM certifications WHERE visible = 'true'`;
     const result = await ordinaryDatabaseQuery(queryString, []);
     return res.json(result.rows);
   } catch (error) {
