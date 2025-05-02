@@ -7,6 +7,7 @@ export const addNewExperience = async (req, res) => {
       id,
       user_id,
       position,
+      responsibilities,
       company_name,
       city,
       country,
@@ -14,7 +15,7 @@ export const addNewExperience = async (req, res) => {
       end_year,
       image_url,
     } = req.body;
-    const queryString = `INSERT INTO experiences (id, user_id, position, company_name, city, country,  start_year, end_year, image_url) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)  RETURNING *`;
+    const queryString = `INSERT INTO experiences (id, user_id, position, company_name, city, country,  start_year, end_year, image_url, responsibilities) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10 )  RETURNING *`;
     const params = [
       id,
       user_id,
@@ -25,10 +26,12 @@ export const addNewExperience = async (req, res) => {
       start_year,
       end_year,
       image_url,
+      responsibilities
     ];
     const result = await ordinaryDatabaseQuery(queryString, params);
     return res.json(result.rows);
   } catch (error) {
+    console.log(error);
     return res.json({
       error: error.message,
       message: "Unexpected error occured",
