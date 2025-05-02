@@ -135,7 +135,6 @@ export const updateProject = async (req, res) => {
 };
 //upload image
 export const uploadProjectImage = async (req, res) => {
-  console.log("don==>", JSON.parse(req.file));
   try {
     if (!JSON.parse(req.file)) {
       return res.json({

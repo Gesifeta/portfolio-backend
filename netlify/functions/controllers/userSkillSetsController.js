@@ -49,7 +49,7 @@ export const getSkillSetsByUserId = async (req, res) => {
     }
     return res.json(result.rows);
   } catch (error) {
-    console.log(error);
+
     return res.json({
       error: error.message,
       message: "Unexpected error occured",

@@ -4,7 +4,7 @@ import { ordinaryDatabaseQuery } from "../database/db.js";
 export const addNewProject = async (req, res) => {
   try {
     const {
-      id = uuidv4(),
+      id,
       title,
       user_id,
       description,
@@ -14,7 +14,7 @@ export const addNewProject = async (req, res) => {
       github_url,
       image_url,
     } = JSON.parse(req.body);
-    const queryString = `INSERT INTO projects (id, title,user_id, description, category, technologies, live_url, github_url, image_url) VALUES ($1, $2, $3, $4, $5,$6, $7,$8,$9) RETURNING *`;
+    const queryString = `INSERT INTO projects (id, title, user_id, description, category, technologies, live_url, github_url, image_url) VALUES ($1, $2, $3, $4, $5,$6, $7,$8,$9) RETURNING *`;
     const params = [
       id,
       title,

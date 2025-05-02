@@ -5,7 +5,6 @@ import { verifyToken } from "./authentication.js";
 // A middleware to check if user is authenticated
 export const isAuthenticated = (req, res, next) => {
   const token = req.cookies?.token;
-  console.log(token);
   if (!token) {
     return res
       .status(401)
