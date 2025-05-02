@@ -39,7 +39,7 @@ export const addNewProject = async (req, res) => {
 // Function definitions
 export const getAllProjects = async (req, res) => {
   try {
-    const queryString = `SELECT * FROM projects`;
+    const queryString = `SELECT * FROM projects WHERE visible = 'true'`;
     const result = await ordinaryDatabaseQuery(queryString);
     if (result.rowCount === 0) {
       return res.json({
