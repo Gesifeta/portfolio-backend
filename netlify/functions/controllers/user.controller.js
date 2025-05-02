@@ -128,7 +128,7 @@ export const loginUser = async (req, res) => {
         sameSite: "none",
         domain:
           process.env.NODE_ENV === "production"
-            ? process.env.FRONTEND_URL
+            ? process.env.BACKEND_URL
             : "localhost",
         path: "/",
       });
