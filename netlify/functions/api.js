@@ -35,7 +35,11 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin: ["https://gemechuadam.com", "http://localhost:5173"],
+    origin: [
+      "https://gemechuadam.com",
+      "https://oromia.dev",
+      "http://localhost:5173",
+    ],
     credentials: true,
   })
 );
@@ -75,8 +79,7 @@ app.use((err, req, res, next) => {
 app.use((req, res, next) => {
   res.setHeader(
     "Access-Control-Allow-Methods",
-    "GET, POST, PUT, DELETE, OPTIONS",
-
+    "GET, POST, PUT, DELETE, OPTIONS"
   );
   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
   res.setHeader("Access-Control-Allow-Credentials", "true");
