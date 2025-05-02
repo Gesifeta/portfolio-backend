@@ -14,7 +14,7 @@ export const addNewExperience = async (req, res) => {
       start_year,
       end_year,
       image_url,
-    } = req.body;
+    } = JSON.parse(req.body);
     const queryString = `INSERT INTO experiences (id, user_id, position, company_name, city, country,  start_year, end_year, image_url, responsibilities) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10 )  RETURNING *`;
     const params = [
       id,
@@ -26,7 +26,7 @@ export const addNewExperience = async (req, res) => {
       start_year,
       end_year,
       image_url,
-      responsibilities
+      responsibilities,
     ];
     const result = await ordinaryDatabaseQuery(queryString, params);
     return res.json(result.rows);
@@ -84,7 +84,7 @@ export const updateExperience = async (req, res) => {
       start_year,
       end_year,
       image_url,
-    } = req.body;
+    } = JSON.parse(req.body);
     const queryString = `UPDATE experiences SET user_id = $1, position = $2, company_name = $3, city = $4, country = $5, start_year = $6, end_year = $7, image_url = $8 WHERE id = $9 RETURNING *`;
     const params = [
       user_id,
@@ -134,13 +134,13 @@ export const deleteExperience = async (req, res) => {
 // upload image
 export const uploadExperienceImage = async (req, res) => {
   try {
-    if (!req.file) {
+    if (!JSON.parse(req.file)) {
       return res.json({
         message: "No file uploaded",
       });
     }
 
-    const { id, image_url } = req.body;
+    const { id, image_url } = JSON.parse(req.body);
 
     const queryString = `UPDATE experiences SET image_url =$1 WHERE id=$2 RETURNING image_url`;
     const params = [image_url, id];
