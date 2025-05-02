@@ -37,7 +37,7 @@ app.use(
   cors({
     origin: [
       "https://gemechuadam.com",
-      "https://oromia.dev",
+      "https://www.oromia.dev",
     ],
     credentials: true,
   })
