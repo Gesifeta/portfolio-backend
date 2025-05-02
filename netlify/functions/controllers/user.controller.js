@@ -126,7 +126,9 @@ export const loginUser = async (req, res) => {
         maxAge: 60 * 60 * 24 * 1000,
         sameSite: "none",
         domain:
-          process.env.NODE_ENV === "production" ? "localhost" : "localhost",
+          process.env.NODE_ENV === "production"
+            ? process.env.BACKEND_URL
+            : "localhost",
         path: "/",
       });
       return res.json({
