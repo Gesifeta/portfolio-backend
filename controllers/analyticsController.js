@@ -15,7 +15,7 @@ export const trackUserVisitor = async (req, res) => {
       city,
       region,
       timezone,
-    } = json.parse(req.body);
+    } = JSON.parse(req.body);
     const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
 
     const query = `
@@ -83,7 +83,7 @@ export const trackCountryPageView = async (req, res) => {
       city,
       region,
       timezone,
-    } = json.parse(req.body);
+    } = JSON.parse(req.body);
     const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
 
     const query = `
@@ -145,7 +145,7 @@ export const trackCountryVisitor = async (req, res) => {
       screenResolution,
       timestamp,
       sessionId,
-    } = json.parse(req.body);
+    } = JSON.parse(req.body);
     const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
 
     const query = `

@@ -42,7 +42,7 @@ export const getSkillById = async (req, res) => {
 // Route for creating a skill
 export const addNewSkill = async (req, res) => {
   try {
-    const { name, level, user_id } = json.parse(req.body);
+    const { name, level, user_id } = JSON.parse(req.body);
     const queryString = `INSERT INTO skills (name, level, user_id) VALUES ($1, $2, $3) RETURNING *`;
     const params = [name, level, user_id];
     const result = await ordinaryDatabaseQuery(queryString, params);
@@ -58,7 +58,7 @@ export const addNewSkill = async (req, res) => {
 export const updateSkill = async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, level } = json.parse(req.body);
+    const { name, level } = JSON.parse(req.body);
     const queryString = `UPDATE skills SET name = $1, level = $2 WHERE id = $3 RETURNING *`;
     const params = [name, level, id];
     const result = await ordinaryDatabaseQuery(queryString, params);

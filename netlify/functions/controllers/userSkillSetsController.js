@@ -3,7 +3,7 @@ import { ordinaryDatabaseQuery } from "../database/db.js";
 // add new skill sets with user id
 export const addNewSkillSet = async (req, res) => {
   try {
-    const { user_id, skill_id } = json.parse(req.body);
+    const { user_id, skill_id } = JSON.parse(req.body);
     const queryString = `INSERT INTO user_skill_sets (id, user_id, skill_id) VALUES ($1, $2, $3) RETURNING *`;
     const params = [uuid_generate_v4(), user_id, skill_id];
     const result = await ordinaryDatabaseQuery(queryString, params);
@@ -139,7 +139,7 @@ export const deleteSkillSetById = async (req, res) => {
 export const updateSkillSetsByUserId = async (req, res) => {
   try {
     const { id } = req.params;
-    const { skill_id } = json.parse(req.body);
+    const { skill_id } = JSON.parse(req.body);
     const queryString = `UPDATE user_skill_sets SET skill_id = $1 WHERE user_id = $2 RETURNING *`;
     const params = [skill_id, id];
     const result = await ordinaryDatabaseQuery(queryString, params);
@@ -160,7 +160,7 @@ export const updateSkillSetsByUserId = async (req, res) => {
 export const updateSkillSetsBySkillId = async (req, res) => {
   try {
     const { id } = req.params;
-    const { user_id } = json.parse(req.body);
+    const { user_id } = JSON.parse(req.body);
     const queryString = `UPDATE user_skill_sets SET user_id = $1 WHERE skill_id = $2 RETURNING *`;
     const params = [user_id, id];
     const result = await ordinaryDatabaseQuery(queryString, params);
@@ -181,7 +181,7 @@ export const updateSkillSetsBySkillId = async (req, res) => {
 export const updateSkillSetById = async (req, res) => {
   try {
     const { id } = req.params;
-    const { user_id, skill_id } = json.parse(req.body);
+    const { user_id, skill_id } = JSON.parse(req.body);
     const queryString = `UPDATE user_skill_sets SET user_id = $1, skill_id = $2 WHERE id = $3 RETURNING *`;
     const params = [user_id, skill_id, id];
     const result = await ordinaryDatabaseQuery(queryString, params);

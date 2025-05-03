@@ -33,7 +33,7 @@ export const serverRateLimit = rateLimit({
 // image url middleware
 export const imageUrlMiddleware = (req, res, next) => {
   if (JSON.parse(req.file)) {
-    json.parse(req.body).image_url = JSON.parse(req.file).path;
+    JSON.parse(req.body).image_url = JSON.parse(req.file).path;
   }
   next();
 };
