@@ -7,6 +7,7 @@ import {
   trackUserVisitor,
   getUserAnalytics,
 } from "../controllers/analyticsController.js";
+import { isAuthenticated } from "../netlify/functions/auth/middleware.js";
 
 export const analyticsRouter = express.Router();
 analyticsRouter.post("/analytics/track", trackUserVisitor);
@@ -16,9 +17,9 @@ analyticsRouter.post(
   trackCountryPageView
 );
 analyticsRouter.get("/analytics/users", getUserAnalytics);
-analyticsRouter.get("/analytics/track/countries", getCountryAnalytics);
-analyticsRouter.post(
-  "/analytics/track/country/visitor",
-
-  trackCountryVisitor
+analyticsRouter.get(
+  "/analytics/track/countries",
+  isAuthenticated,
+  getCountryAnalytics
 );
+analyticsRouter.post("/analytics/track/country/visitor", trackCountryVisitor);
