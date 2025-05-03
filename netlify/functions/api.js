@@ -38,6 +38,7 @@ app.use(
     origin: [
       "https://gemechuadam.com",
       "https://www.oromia.dev",
+      "http://localhost:5173",
     ],
     credentials: true,
   })

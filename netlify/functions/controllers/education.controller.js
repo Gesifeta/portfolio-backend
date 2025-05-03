@@ -18,7 +18,7 @@ export async function addNewEducation(req, res) {
       grade,
       start_year,
       end_year,
-    } = JSON.parse(req.body);
+    } = json.parse(req.body);
     const queryString = `INSERT INTO educations (id, user_id, institution, school_name, field_of_study, specialization, level, name_of_award, grade, start_year, end_year, city, state, country) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING *`;
     const params = [
       id,
@@ -112,7 +112,7 @@ export async function updateEducation(req, res) {
       grade,
       start_year,
       end_year,
-    } = JSON.parse(req.body);
+    } = json.parse(req.body);
     const queryString = `UPDATE educations SET  school_name = $1, field_of_study = $2, specialization = $3, level = $4, name_of_award = $5, grade = $6, start_year = $7, end_year = $8, institution = $9 WHERE id = $10 RETURNING *`;
     const params = [
       school_name,
@@ -160,7 +160,7 @@ export async function deleteEducation(req, res) {
 // upload education image
 export const uploadEducationImage = async (req, res) => {
   try {
-    const { id, image_url } = JSON.parse(req.body);
+    const { id, image_url } = json.parse(req.body);
 
     const queryString = `UPDATE educations SET image_url = $1 WHERE id = $2 RETURNING *`;
     const params = [image_url, id];
